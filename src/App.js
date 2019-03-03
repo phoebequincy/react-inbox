@@ -36,7 +36,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+      {(this.state.messages) ?
+          <React.Fragment>
+          <Toolbar />
+          <MessageList />
+          <React.Fragment> :
+          <Loading />
+      }
       </div>
     );
   }
