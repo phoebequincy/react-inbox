@@ -9,21 +9,18 @@ import '@fortawesome/free-solid-svg-icons'
 
 //Components
 import ProgressBar from './components/ProgressBar'
-import MessageList from './components/MessageList'
+import Messages from './components/Messages'
 import Toolbar from './components/Toolbar'
 import Compose from './components/Compose'
 
 class App extends Component {
 
-  state = {
+  state = {messages:[]}
 
-  }
-
-  componentDidMount = async () => {
-    const response = await
-      fetch('http://localhost:8082/api/messages')
-      const json = await response.json()
-      this.setState({ messages: json})
+  async componentDidMount() {
+  const response = await fetch('http://localhost:8082/api/messages')
+  const json = await response.json()
+  this.setState({messages:json})
   }
 
 
@@ -36,15 +33,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      {(this.state.messages) ?
-          <React.Fragment>
-          <Toolbar />
-          <MessageList />
-          <React.Fragment> :
-          <Loading />
-      }
+      <div className="App container">
+      <ToolBar
+        messages= {this.state.messages}
+      />
+
+      <Messages
+        messages= {this.state.messages}
+      />
       </div>
-    );
+    )
   }
 }
 
